@@ -1,6 +1,5 @@
-package com.springboot.proyectofct.app.entity;
+package com.springboot.proyectofct.app.models.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,10 +12,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-
-
 @Entity
-public class User implements Serializable{
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -152,6 +149,4 @@ public class User implements Serializable{
 	public void setState(String state) {
 		this.state = state;
 	}
-
-
 }

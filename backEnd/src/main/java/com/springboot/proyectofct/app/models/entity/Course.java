@@ -1,4 +1,4 @@
-package com.springboot.proyectofct.app.entity;
+package com.springboot.proyectofct.app.models.entity;
 
 import java.io.Serializable;
 
