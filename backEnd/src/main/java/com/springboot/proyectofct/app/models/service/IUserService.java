@@ -12,4 +12,5 @@ public interface IUserService {
 	public User saveUser(User user);
 
 	public void deleteUserById(Long id);
+	
 }

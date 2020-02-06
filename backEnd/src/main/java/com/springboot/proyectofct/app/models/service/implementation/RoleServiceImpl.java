@@ -13,31 +13,32 @@ import com.springboot.proyectofct.app.models.service.IRoleService;
 @Service
 public class RoleServiceImpl implements IRoleService {
 
-	@Autowired 
-	private IRoleDao roleDao; 
-	 
-	@Override 
-	@Transactional(readOnly = true) 
-	public List<Role> listAll() { 
-		return (List<Role>) roleDao.findAll(); 
-	} 
- 
-	@Override 
-	@Transactional(readOnly = true) 
-	public Role findById(Long id) { 
-		return roleDao.findById(id).orElse(null); 
-	} 
-	
-	@Override 
-	@Transactional 
-	public void deleteById(Long id) { 
-		roleDao.deleteById(id); 
- 
-	} 
- 
-	@Override 
-	@Transactional 
-	public Role save(Role role) { 
-		return roleDao.save(role); 
-	} 
+	@Autowired
+	private IRoleDao roleDao;
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Role> listAll() {
+		return (List<Role>) roleDao.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Role findById(Long id) {
+		return roleDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public void deleteById(Long id) {
+		roleDao.deleteById(id);
+
+	}
+
+	@Override
+	@Transactional
+	public Role save(Role role) {
+		return roleDao.save(role);
+	}
+
 }

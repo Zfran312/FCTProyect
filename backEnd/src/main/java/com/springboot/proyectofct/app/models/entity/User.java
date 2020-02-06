@@ -1,7 +1,6 @@
 package com.springboot.proyectofct.app.models.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -86,7 +85,7 @@ public class User {
 	/**
 	 * Main roles of user
 	 */
-	private List<Role> role;
+	/*private List<Role> role;*/
 
 	/**
 	 * State of user (enabled, disabled, blocked or pending activation)
@@ -238,16 +237,16 @@ public class User {
 	/**
 	 * @return the role
 	 */
-	public List<Role> getRole() {
-		return role;
-	}
+//	public List<Role> getRole() {
+//		return role;
+//	}
 
 	/**
 	 * @param role the role to set
 	 */
-	public void setRole(List<Role> role) {
-		this.role = role;
-	}
+//	public void setRole(List<Role> role) {
+//		this.role = role;
+//	}
 
 	/**
 	 * @return the state

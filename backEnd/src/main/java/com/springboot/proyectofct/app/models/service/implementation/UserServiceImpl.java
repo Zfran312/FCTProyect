@@ -12,32 +12,34 @@ import com.springboot.proyectofct.app.models.service.IUserService;
 
 @Service
 public class UserServiceImpl implements IUserService{
+	
 	@Autowired
-	private IUserDao userDao;
+	private IUserDao userService;
 	
 	@Override
 	@Transactional(readOnly = true)
 	public List<User> findAll() {
-		return (List<User>) userDao.findAll();
+		return (List<User>) userService.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public User findById(Long id) {
-		return userDao.findById(id).orElse(null);
+		return userService.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public User saveUser(User user) {
-		return userDao.save(user);	
+		return userService.save(user);	
 	}
 
 	@Override
 	@Transactional
 	public void deleteUserById(Long id) {
-		userDao.deleteById(id);
+		userService.deleteById(id);
 		
 	}
+
 
 }

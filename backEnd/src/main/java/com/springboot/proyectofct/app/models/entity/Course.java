@@ -2,6 +2,7 @@ package com.springboot.proyectofct.app.models.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,54 +17,64 @@ public class Course implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	// id curso, clave principal, autogenerada
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_course;
+	@Column(name = "id_course")
+	private long idCourse;
 	
+	//nombre
 	@NotEmpty
-	private String name_course;
+	@Column(name = "name_course")
+	private String nameCourse;
 	
+	//descripcion
 	@NotEmpty
-	private String desc_c;
+	@Column(name = "desc_c")
+	private String descC;
 	
+	//duracion del curso
 	@NotEmpty
 	private String duration;
 	
+	//tematica
 	@NotEmpty
 	private String topic;
 	
+	//skill
 	@NotEmpty
 	private String level;
 	
+	//indica si el curos está publicado
 	@NotNull
 	private boolean enabled;
 	
+	//ruta del curso
 	@NotEmpty
 	private String route;
 
-	
-	public long getId_course() {
-		return id_course;
+	public long getIdCourse() {
+		return idCourse;
 	}
 
-	public void setId_course(long id_course) {
-		this.id_course = id_course;
+	public void setIdCourse(long idCourse) {
+		this.idCourse = idCourse;
 	}
 
-	public String getName_course() {
-		return name_course;
+	public String getNameCourse() {
+		return nameCourse;
 	}
 
-	public void setName_course(String name_course) {
-		this.name_course = name_course;
+	public void setNameCourse(String nameCourse) {
+		this.nameCourse = nameCourse;
 	}
 
-	public String getDesc_c() {
-		return desc_c;
+	public String getDescC() {
+		return descC;
 	}
 
-	public void setDesc_c(String desc_c) {
-		this.desc_c = desc_c;
+	public void setDescC(String descC) {
+		this.descC = descC;
 	}
 
 	public String getDuration() {
@@ -106,4 +117,5 @@ public class Course implements Serializable{
 		this.route = route;
 	}
 
+	
 }
