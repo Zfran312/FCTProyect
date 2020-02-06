@@ -32,21 +32,21 @@ public class CourseServiceImpl implements ICourseService{
 	}
 
 	@Override
-	public void save(Course course) {
+	public Course save(Course course) {
 		// TODO Auto-generated method stub
-		courseDao.save(course);
+		return courseDao.save(course);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Course findOne(Long idCourse) {
+	public Course findById(Long idCourse) {
 		// TODO Auto-generated method stub
 		return courseDao.findById(idCourse).orElse(null);
 	}
 
 	@Override
 	@Transactional
-	public void delete(Long idCourse) {
+	public void deleteById(Long idCourse) {
 		// TODO Auto-generated method stub
 		courseDao.deleteById(idCourse);
 	}
