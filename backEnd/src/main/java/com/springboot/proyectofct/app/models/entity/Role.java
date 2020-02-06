@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table; 
  
 @Entity 
-@Table(name = "tb_role") 
+@Table(name = "tb_roles") 
 public class Role implements Serializable { 
  
 	/** 
@@ -24,7 +24,7 @@ public class Role implements Serializable {
 	@Id 
 	@Column(name = "id_role") 
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	private Integer idRole; 
+	private Long idRole; 
  
 	/** 
 	 * Main name of the role 
@@ -41,14 +41,14 @@ public class Role implements Serializable {
 	/** 
 	 * @return the idRole 
 	 */ 
-	public Integer getIdRole() { 
+	public Long getIdRole() { 
 		return idRole; 
 	} 
  
 	/** 
 	 * @param idRole the idRole to set 
 	 */ 
-	public void setIdRole(Integer idRole) { 
+	public void setIdRole(Long idRole) { 
 		this.idRole = idRole; 
 	} 
  
