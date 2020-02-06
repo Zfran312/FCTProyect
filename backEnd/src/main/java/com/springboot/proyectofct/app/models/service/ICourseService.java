@@ -13,10 +13,10 @@ public interface ICourseService {
 	
 	public Page<Course> findAll(Pageable pageable);
 
-	public void save(Course course);
+	public Course save(Course course);
 
-	public Course findOne(Long idCourse);
+	public Course findById(Long idCourse);
 
-	public void delete(Long idCourse);
+	public void deleteById(Long idCourse);
 	
 }
