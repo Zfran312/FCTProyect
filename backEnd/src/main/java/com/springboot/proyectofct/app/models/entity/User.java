@@ -92,7 +92,7 @@ public class User {
 	 */
 	@NotNull
 	@Column(name = "user_state")
-	private String state;
+	private int state;
 
 	/**
 	 * @return the idUser
@@ -251,14 +251,14 @@ public class User {
 	/**
 	 * @return the state
 	 */
-	public String getState() {
+	public int getState() {
 		return state;
 	}
 
 	/**
 	 * @param state the state to set
 	 */
-	public void setState(String state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 
