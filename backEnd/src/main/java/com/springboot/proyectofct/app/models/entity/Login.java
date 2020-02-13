@@ -8,11 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.springboot.proyectofct.app.models.service.implementation.UserServiceImpl;
 
 @Entity
+@Table(name = "tb_login")
 public class Login implements Serializable{
 
 	@Id
