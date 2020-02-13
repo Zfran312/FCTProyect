@@ -12,9 +12,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -102,7 +103,8 @@ public class User implements Serializable {
 	 */
 	@NotNull
 	@Column(name = "user_state")
-	@Size(min = 0, max = 3)
+	@Min(0) 
+	@Max(3) 
 	private int state;
 
 	/**
