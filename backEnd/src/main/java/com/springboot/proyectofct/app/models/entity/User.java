@@ -2,12 +2,14 @@ package com.springboot.proyectofct.app.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,7 +45,7 @@ public class User implements Serializable {
 	 */
 	@NotNull
 	@Column(name = "name_user", length = 25)
-	private String nameUser;
+	private String username;
 
 	/**
 	 * First lastname of user
@@ -96,7 +98,9 @@ public class User implements Serializable {
 	/**
 	 * Main roles of user
 	 */
-	/*private List<Role> role;*/
+	@ManyToMany
+	private List<Role> role;
+
 
 	/**
 	 * State of user (enabled, disabled, blocked or pending activation)
@@ -139,14 +143,14 @@ public class User implements Serializable {
 	 * @return the nameUser
 	 */
 	public String getNameUser() {
-		return nameUser;
+		return username;
 	}
 
 	/**
 	 * @param nameUser the nameUser to set
 	 */
-	public void setNameUser(String nameUser) {
-		this.nameUser = nameUser;
+	public void setNameUser(String username) {
+		this.username = username;
 	}
 
 	/**
@@ -250,16 +254,17 @@ public class User implements Serializable {
 	/**
 	 * @return the role
 	 */
-//	public List<Role> getRole() {
-//		return role;
-//	}
+	
+	public List<Role> getRole() {
+		return role;
+	}
 
 	/**
 	 * @param role the role to set
 	 */
-//	public void setRole(List<Role> role) {
-//		this.role = role;
-//	}
+	public void setRole(List<Role> role) {
+		this.role = role;
+	}
 
 	/**
 	 * @return the state
