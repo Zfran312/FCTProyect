@@ -11,12 +11,7 @@ import javax.persistence.Table;
 @Entity 
 @Table(name = "tb_authorities") 
 public class Authorities implements Serializable { 
- 
-	/** 
-	 *  
-	 */ 
-	private static final long serialVersionUID = 1L; 
- 
+  
 	@Id 
 	@ManyToOne 
 	@JoinColumn(name = "id_user") 
@@ -54,5 +49,9 @@ public class Authorities implements Serializable {
 	public void setRole(Role role) { 
 		this.role = role; 
 	} 
- 
+
+	/** 
+	 *  
+	 */ 
+	private static final long serialVersionUID = 1L; 
 } 
