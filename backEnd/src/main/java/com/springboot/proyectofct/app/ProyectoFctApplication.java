@@ -21,7 +21,7 @@ public class ProyectoFctApplication {
 	    mailSender.setHost("smtp.gmail.com");
 	    mailSender.setPort(587);
 	     
-	    mailSender.setUsername("udemylito@gmail.com");
+	    mailSender.setUsername("proyectoFct@gmail.com");
 	    mailSender.setPassword("zanahoria29");
 	     
 	    Properties props = mailSender.getJavaMailProperties();
