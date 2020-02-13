@@ -41,7 +41,7 @@ public class CourseController {
 			return courseService.save(course);
 		}
 		
-		@PutMapping("/courses")
+		@PutMapping("/courses/{id}")
 		public Course updateCourse(@Valid @RequestBody Course course) {	
 			return courseService.save(course);
 		}

@@ -13,22 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany; 
 import javax.persistence.Table; 
 import javax.validation.constraints.NotNull; 
- 
-/** 
- *  
- * @author a759460 
- * 
- *			References the elements of the user interface 
- */ 
+
 @Entity 
 @Table(name = "tb_elements") 
 public class Element implements Serializable { 
- 
-	/** 
-	 *  
-	 */ 
-	private static final long serialVersionUID = 1L; 
- 
+  
 	/** 
 	 * Id primary key 
 	 */ 
@@ -120,6 +109,10 @@ public class Element implements Serializable {
 	public void setPermissions(List<Permission> permissions) { 
 		this.permissions = permissions; 
 	} 
- 
-	 
+	
+
+	/** 
+	 *  
+	 */ 
+	private static final long serialVersionUID = 1L;	 
 }

@@ -32,13 +32,17 @@ public class RoleServiceImpl implements IRoleService {
 	@Transactional
 	public void deleteById(Long id) {
 		roleDao.deleteById(id);
-
 	}
 
 	@Override
 	@Transactional
 	public Role save(Role role) {
 		return roleDao.save(role);
+	}
+	
+	@Override
+	public List<Role> filterByName(String name) {
+		return roleDao.filterByName(name);
 	}
 
 }

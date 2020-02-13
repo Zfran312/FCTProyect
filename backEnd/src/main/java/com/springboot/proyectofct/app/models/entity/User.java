@@ -2,14 +2,14 @@ package com.springboot.proyectofct.app.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,7 +18,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -31,13 +30,13 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_user")
-	private long idUser;
+	private Long idUser;
 
 	/**
-	 * User das id 
+	 * User das id
 	 */
 	@NotNull
-	@Column(name = "das_id", length = 7, unique = true)
+	@Column(name = "das_id", length = 7)
 	private String dasId;
 
 	/**
@@ -45,7 +44,7 @@ public class User implements Serializable {
 	 */
 	@NotNull
 	@Column(name = "name_user", length = 25)
-	private String username;
+	private String nameUser;
 
 	/**
 	 * First lastname of user
@@ -65,15 +64,16 @@ public class User implements Serializable {
 	 */
 	@NotNull
 	@Email
-	@Column(length = 80) 
+	@Column(length = 80)
 	private String email;
 
 	/**
 	 * Birthdate of user
 	 */
+	@NotNull
 	@Column(name = "birth_d")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-MM-dd") 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Past
 	private Date birthDate;
 
@@ -96,20 +96,37 @@ public class User implements Serializable {
 	private String numSS;
 
 	/**
-	 * Main roles of user
-	 */
-	@ManyToMany
-	private List<Role> role;
-
-
-	/**
 	 * State of user (enabled, disabled, blocked or pending activation)
 	 */
 	@NotNull
-	@Column(name = "user_state")
-	@Min(0) 
-	@Max(3) 
-	private int state;
+	@Column(name = "user_status")
+	@Min(0)
+	@Max(3)
+	private Integer status;
+
+	@OneToMany(mappedBy = "user")
+	private Set<UserCourse> userCourse;
+
+	/**
+	 * @param idUser the idUser to set
+	 */
+	public void setIdUser(Long idUser) {
+		this.idUser = idUser;
+	}
+
+	/**
+	 * @return the userCourse
+	 */
+	public Set<UserCourse> getUserCourse() {
+		return userCourse;
+	}
+
+	/**
+	 * @param userCourse the userCourse to set
+	 */
+	public void setUserCourse(Set<UserCourse> userCourse) {
+		this.userCourse = userCourse;
+	}
 
 	/**
 	 * @return the idUser
@@ -143,14 +160,14 @@ public class User implements Serializable {
 	 * @return the nameUser
 	 */
 	public String getNameUser() {
-		return username;
+		return nameUser;
 	}
 
 	/**
 	 * @param nameUser the nameUser to set
 	 */
-	public void setNameUser(String username) {
-		this.username = username;
+	public void setNameUser(String nameUser) {
+		this.nameUser = nameUser;
 	}
 
 	/**
@@ -252,37 +269,21 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @return the role
-	 */
-	
-	public List<Role> getRole() {
-		return role;
-	}
-
-	/**
-	 * @param role the role to set
-	 */
-	public void setRole(List<Role> role) {
-		this.role = role;
-	}
-
-	/**
 	 * @return the state
 	 */
-	public int getState() {
-		return state;
+	public Integer getStatus() {
+		return status;
 	}
 
 	/**
 	 * @param state the state to set
 	 */
-	public void setState(int state) {
-		this.state = state;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 }
