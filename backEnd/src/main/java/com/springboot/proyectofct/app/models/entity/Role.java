@@ -1,12 +1,14 @@
 package com.springboot.proyectofct.app.models.entity;
 
-import java.io.Serializable; 
+import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column; 
 import javax.persistence.Entity; 
 import javax.persistence.GeneratedValue; 
 import javax.persistence.GenerationType; 
-import javax.persistence.Id; 
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull; 
@@ -14,11 +16,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "tb_roles")
 public class Role implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Role primary key
@@ -42,6 +39,9 @@ public class Role implements Serializable {
 	@Column(name = "desc_role", length = 40)
 	private String description;
 
+	@OneToMany(mappedBy = "role") 
+	private Set<Authorities> authorities; 
+	
 	/**
 	 * @return the idRole
 	 */
@@ -84,4 +84,17 @@ public class Role implements Serializable {
 		this.description = description;
 	}
 
+	public Set<Authorities> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Set<Authorities> authorities) {
+		this.authorities = authorities;
+	}
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 }
