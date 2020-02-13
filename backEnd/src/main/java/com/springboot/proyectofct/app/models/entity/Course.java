@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_courses")
@@ -25,29 +26,32 @@ public class Course implements Serializable{
 	
 	//nombre
 	@NotEmpty
-	@Column(name = "name_course")
+	@Column(name = "name_course", length = 60)
 	private String nameCourse;
 	
 	//descripcion
 	@NotEmpty
-	@Column(name = "desc_c")
+	@Column(name = "desc_course", length = 60)
 	private String descC;
 	
 	//duracion del curso
 	@NotEmpty
+	@Size(min = 1, max = 999)
 	private String duration;
 	
 	//tematica
 	@NotEmpty
+	@Column(length = 15)
 	private String topic;
 	
 	//skill
 	@NotEmpty
+	@Column(length = 15)
 	private String level;
 	
 	//indica si el curos está publicado
 	@NotNull
-	private boolean enabled;
+	private boolean published;
 	
 	//ruta del curso
 	@NotEmpty
@@ -102,11 +106,11 @@ public class Course implements Serializable{
 	}
 
 	public boolean isEnabled() {
-		return enabled;
+		return published;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setEnabled(boolean published) {
+		this.published = published;
 	}
 
 	public String getRoute() {
