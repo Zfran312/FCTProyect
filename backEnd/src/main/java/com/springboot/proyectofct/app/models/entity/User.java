@@ -37,7 +37,7 @@ public class User implements Serializable {
 	 * User das id 
 	 */
 	@NotNull
-	@Column(name = "das_id", length = 7)
+	@Column(name = "das_id", length = 7, unique = true)
 	private String dasId;
 
 	/**
