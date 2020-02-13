@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import com.springboot.proyectofct.app.models.service.implementation.UserServiceImpl;
+
 @Entity
 public class Login implements Serializable{
 
@@ -29,7 +31,7 @@ public class Login implements Serializable{
 	private boolean enabled;
 
 	public List<Role> getUserRole() {
-		User user = new User();
+		User user = new UserServiceImpl().findByDasId(dasId);
 		return user.getRole();
 	}
 

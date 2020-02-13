@@ -8,6 +8,8 @@ public interface IUserService {
 	public List<User> findAll();
 
 	public User findById(Long id);
+	
+	public User findByDasId(String dasId);
 
 	public User saveUser(User user);
 
