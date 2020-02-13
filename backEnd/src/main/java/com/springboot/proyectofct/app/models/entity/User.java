@@ -1,5 +1,6 @@
 package com.springboot.proyectofct.app.models.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,10 +13,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "tb_users")
-public class User {
+public class User implements Serializable {
 
 	/**
 	 * User primary key
@@ -29,27 +34,27 @@ public class User {
 	 * User das id 
 	 */
 	@NotNull
-	@Column(name = "das_id")
+	@Column(name = "das_id", length = 7)
 	private String dasId;
 
 	/**
 	 * Name of user
 	 */
 	@NotNull
-	@Column(name = "name_user")
+	@Column(name = "name_user", length = 25)
 	private String nameUser;
 
 	/**
 	 * First lastname of user
 	 */
 	@NotNull
-	@Column(name = "lastname_1")
+	@Column(name = "lastname_1", length = 25)
 	private String lastname1;
 
 	/**
 	 * Second lastname of user
 	 */
-	@Column(name = "lastname_2")
+	@Column(name = "lastname_2", length = 25)
 	private String lastname2;
 
 	/**
@@ -57,6 +62,7 @@ public class User {
 	 */
 	@NotNull
 	@Email
+	@Column(length = 80) 
 	private String email;
 
 	/**
@@ -64,22 +70,26 @@ public class User {
 	 */
 	@Column(name = "birth_d")
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd") 
+	@Past
 	private Date birthDate;
 
 	/**
 	 * Number of telephone of user
 	 */
+	@Column(length = 25)
 	private String phone;
 
 	/**
 	 * Type of identifier: DNI, NIE or passport
 	 */
+	@Column(length = 20)
 	private String document;
 
 	/**
 	 * Number of social security
 	 */
-	@Column(name = "num_ss")
+	@Column(name = "num_ss", length = 14)
 	private String numSS;
 
 	/**
@@ -92,6 +102,7 @@ public class User {
 	 */
 	@NotNull
 	@Column(name = "user_state")
+	@Size(min = 0, max = 3)
 	private int state;
 
 	/**
@@ -262,6 +273,9 @@ public class User {
 		this.state = state;
 	}
 
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 }
