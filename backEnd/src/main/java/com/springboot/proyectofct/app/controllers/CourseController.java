@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.proyectofct.app.models.entity.Course;
+import com.springboot.proyectofct.app.models.entity.Skill;
 import com.springboot.proyectofct.app.models.service.ICourseService;
+import com.springboot.proyectofct.app.models.service.ISkillService;
+
+
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
@@ -26,7 +30,10 @@ public class CourseController {
 		@Autowired
 		private ICourseService courseService;
 		
-		@GetMapping("/curso/listar")
+		@Autowired
+		private ISkillService iSkillService;
+		
+		@GetMapping("/course/listar")
 		public List<Course> ListCourses() {
 			return courseService.findAll();
 		}
@@ -50,5 +57,21 @@ public class CourseController {
 		public void deleteCourse(@PathVariable Long id) {
 			 courseService.deleteById(id);
 		}
+		
+		@GetMapping("/skills")
+		public List<Skill> recuperarSkill() {
+			return iSkillService.findAll();
+		}
+		
+		@PostMapping("/skills")
+		public List<Skill> recibirSkill(@Valid @RequestBody List<Skill> list ) {
+			/*System.out.println("HOLA MUNDO =>"+list.get(list.size()).getName());
+			list_id = new ArrayList<Long>();
+			for(int i = 0; i< list.size()-1; i++) {
+				
+				list_id.add(list.get(i).getIdSkill());
+			}*/
+			
+			return list;
+		}
 }
-

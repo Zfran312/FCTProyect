@@ -34,7 +34,8 @@ public class Login implements Serializable{
 
 	public List<Role> getUserRole() {
 		User user = new UserServiceImpl().findByDasId(dasId);
-		return user.getRole();
+		return null;
+		//return user.getRole();
 	}
 
 	/**
