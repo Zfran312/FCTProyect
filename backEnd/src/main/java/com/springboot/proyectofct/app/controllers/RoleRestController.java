@@ -1,10 +1,13 @@
 package com.springboot.proyectofct.app.controllers;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,35 +28,51 @@ public class RoleRestController {
 
 	@Autowired
 	private IRoleService service;
+	
+	private Boolean modificar = false;
 
 	@GetMapping("/roles")
-	public List<Role> listAll() {
-		return service.listAll();	
+	public List<Role> ListRoles() {
+		return service.findAll();
+	}
 
+	@GetMapping("/roles/page/{page}/{paramOrder}/{orden}")
+	public Page<Role> ListRolesPage(@PathVariable Integer page, @PathVariable String paramOrder, @PathVariable String orden) {
+		return service.findAll(page, paramOrder, orden);
 	}
 
 	@GetMapping("/roles/{id}")
 	public Role get(@PathVariable Long id) {
 		return service.findById(id);
 	}
-
-	@DeleteMapping("/roles/{id}")
-	public void deleteById(@PathVariable Long id) {
-		service.deleteById(id);
+	
+	@GetMapping("/roles/userslist/{id}")
+	public List<Optional<User>> getListUsersRole(@PathVariable Long id) throws SQLException {
+		return service.findListUsersRole(id);
+	}
+	
+	@GetMapping("/roles/filterbyrolename/page/{page}/{name}/{paramOrder}/{orden}")
+	public Page<Role> filterByName(@PathVariable int page, @PathVariable String name , @PathVariable String paramOrder, @PathVariable String orden) {
+		return service.filterByNamePage(name, page, paramOrder, orden);
+	}
+	
+	@GetMapping("/roles/usersbyrole/{id}")
+	public List<Long> findUserByRole(@PathVariable Long id) throws SQLException {
+		return service.findUserByRole(id);
 	}
 
 	@PostMapping("/roles")
-	public Role save(@Valid @RequestBody Role role) {
-		return service.save(role);
+	public Role save(@Valid @RequestBody Role role) throws SQLException {
+		return service.save(role, modificar);		
 	}
 	
 	@PutMapping("/roles/{id}")
-	public Role update(@Valid @RequestBody Role role) {
-		return service.save(role);
+	public Role update(@Valid @RequestBody Role role) throws SQLException {
+		return service.save(role, modificar = true);
 	}
-
-	@GetMapping("/roles/filterbyrolename/{name}")
-	public List<Role> filterByName(@PathVariable String name) {
-		return service.filterByName(name);
+	
+	@DeleteMapping("/roles/{id}")
+	public void deleteById(@PathVariable Long id) throws SQLException {
+		service.deleteById(id);
 	}
 }

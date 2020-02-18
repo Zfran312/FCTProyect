@@ -1,12 +1,9 @@
 package com.springboot.proyectofct.app.controllers;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,41 +23,53 @@ import com.springboot.proyectofct.app.models.service.IUserService;
 public class UserRestController {
 
 	@Autowired
-	private JavaMailSender emailSender;
-
-	@Autowired
 	private IUserService userService;
 
-	@GetMapping("/listar")
+	@GetMapping("/users")
 	public List<User> ListUsers() {
 		return userService.findAll();
 	}
 
+	@GetMapping("/users/page/{page}/{paramOrder}/{orden}")
+	public Page<User> ListUsers(@PathVariable Integer page, @PathVariable String paramOrder,
+			@PathVariable String orden) {
+		return userService.findAll(page, paramOrder, orden);
+	}
+	
 	@GetMapping("/users/{id}")
 	public User getUser(@PathVariable Long id) {
 		return userService.findById(id);
 	}
+	
+	@GetMapping("/users/filterbydasid/{dasId}")
+	public User filterByDasId(@PathVariable String dasId) {
+		return userService.findByDasId(dasId);
+	}
+
+	@GetMapping("/users/dasvalid/{dasId}")
+	public boolean dasValid(@PathVariable String dasId) {
+		return userService.validDas(dasId);
+	}
+
+	@GetMapping("/users/filterbynested/page/{page}/{dasId}/{name}/{lastname1}/{lastname2}/{paramOrder}/{ordenado}")
+	public Page<User> filterNested(@PathVariable int page, @PathVariable String dasId, @PathVariable String name,
+			@PathVariable String lastname1, @PathVariable String lastname2, @PathVariable String paramOrder, @PathVariable String ordenado ) {
+		return userService.filterNestedPage(dasId, name, lastname1, lastname2, page, paramOrder, ordenado);
+	}
 
 	@PostMapping("/users")
 	public User saveUser(@Valid @RequestBody User user) {
-
-		String changePassRoute = "http://localhost:4200/changePassword/" + String.valueOf((user.getIdUser() + 1)) + "/"
-				+ user.getDasId();
-		System.out.println("-------------------------------------------------------->" + changePassRoute);
-
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setTo(user.getEmail());
-		message.setSubject("Contraseña de inicio de sesión");
-		message.setText(
-				"¡Hola!\nGracias por crear la cuenta, a continuación le proporcionamos un link para que establezca su contraseña:\n"
-						+ changePassRoute);
-		emailSender.send(message);
 		return userService.saveUser(user);
+	}
+
+	@PostMapping("/usersList")
+	public void saveUser(@RequestBody List<User> users) {
+		userService.saveListUser(users);
 	}
 
 	@PutMapping("/users/{id}")
 	public User updateUser(@Valid @RequestBody User user) {
-		return userService.saveUser(user);
+		return userService.updateUser(user);
 
 	}
 

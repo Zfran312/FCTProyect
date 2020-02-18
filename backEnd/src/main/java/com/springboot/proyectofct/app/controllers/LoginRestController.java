@@ -1,5 +1,7 @@
 package com.springboot.proyectofct.app.controllers;
 
+import java.sql.SQLException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.proyectofct.app.models.entity.Login;
-import com.springboot.proyectofct.app.models.entity.User;
 import com.springboot.proyectofct.app.models.service.ILoginService;
+
+import org.springframework.web.bind.annotation.PutMapping;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
@@ -21,21 +24,30 @@ public class LoginRestController {
 	@Autowired
 	private ILoginService loginService;
 	
+	@PostMapping("/saveUserlogin")
+	public Login save(@Valid @RequestBody Login login) {
+		return loginService.saveLogin(login);
+	}
 
 	@PostMapping("/login")
-	public Login save(@Valid @RequestBody Login login, @RequestBody User user) {
-				
-		String loginDas = login.getDasId();
-		long loginId = login.getId();
-		
-		String userDas = user.getDasId();
-		long userId = user.getIdUser();
-		
-		if(!loginDas.equals(userDas)  || loginId != userId) {
-			return null;
-		} else {
-			return loginService.saveLogin(login);
-		}
+	public Boolean login(@RequestBody Login login) throws SQLException {
+		return loginService.checkLogin(login);
+	}
+
+	@PostMapping("/login/addattempt")
+	public Login addAttempt(@Valid @RequestBody Login login) throws SQLException {
+		loginService.addAttempt(login);
+		return login;
 	}
 	
+	@PostMapping("/login/checkstatus")
+	public Login checkStatus(@Valid @RequestBody Login login) throws SQLException {
+		login = loginService.checkStatus(login);
+		return login;
+	}
+
+	@PutMapping("/modifyUserlogin")
+	public Login Modify(@Valid @RequestBody Login login) {
+		return loginService.updateLogin(login);
+	}
 }
