@@ -14,14 +14,11 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "tb_courses_user")
 public class UserCourse implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Id of course
@@ -37,6 +34,7 @@ public class UserCourse implements Serializable {
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_user")
+	@JsonBackReference
 	private User user;
 
 	/**
@@ -59,7 +57,7 @@ public class UserCourse implements Serializable {
 	 * This attribute indicates that the course is finished
 	 */
 	@NotNull
-	private boolean finished;
+	private Boolean finished;
 
 	/**
 	 * Evidence of the course
@@ -174,4 +172,5 @@ public class UserCourse implements Serializable {
 		this.finished = finished;
 	}
 
+	private static final long serialVersionUID = 1L;
 }

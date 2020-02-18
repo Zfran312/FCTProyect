@@ -66,7 +66,7 @@ public class Course implements Serializable {
 	private String route;
 	
 	@ManyToMany
-	@JoinTable(name = "tb_relacion_course_skill",
+	@JoinTable(name = "tb_course_skill",
 	joinColumns = @JoinColumn(name ="id_course"),
 	inverseJoinColumns = @JoinColumn(name ="id_skill"))
 	private Set<Skill> skills;
@@ -170,7 +170,6 @@ public class Course implements Serializable {
 	public void setSkills(Set<Skill> skills) {
 		this.skills = skills;
 	}
-
 
 	private static final long serialVersionUID = 1L;
 }
