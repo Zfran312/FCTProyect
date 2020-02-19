@@ -1,5 +1,6 @@
 package com.springboot.proyectofct.app.models.service.implementation;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,40 +16,42 @@ import com.springboot.proyectofct.app.models.service.ICourseService;
 @Service
 public class CourseServiceImpl implements ICourseService{
 
-	@Autowired
-	private ICourseDao courseDao;
-	
 	@Override
-	@Transactional(readOnly = true)
-	public List<Course> findAll() {
+	public Page<Course> findAll(int page, String paramOrder, String orden) {
 		// TODO Auto-generated method stub
-		return (List<Course>) courseDao.findAll();
-	}
-
-	@Override
-	public Page<Course> findAll(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return courseDao.findAll(pageable);
+		return null;
 	}
 
 	@Override
 	public Course save(Course course) {
 		// TODO Auto-generated method stub
-		return courseDao.save(course);
+		return null;
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public Course findById(Long idCourse) {
 		// TODO Auto-generated method stub
-		return courseDao.findById(idCourse).orElse(null);
+		return null;
 	}
 
 	@Override
-	@Transactional
-	public void deleteById(Long idCourse) {
+	public void deleteById(Long id, String route) {
 		// TODO Auto-generated method stub
-		courseDao.deleteById(idCourse);
+		
 	}
 
+	@Override
+	public File fileFtp(String file) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Course> filterNestedPage(String nameCourse, Integer duration1, Integer duration2, String topic,
+			String level, int page, String paramOrder, String orden) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }

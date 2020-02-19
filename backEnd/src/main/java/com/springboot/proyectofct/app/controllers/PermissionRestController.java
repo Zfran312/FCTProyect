@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.proyectofct.app.models.entity.Element;
+import com.springboot.proyectofct.app.models.entity.Permission;
+import com.springboot.proyectofct.app.models.entity.Role;
+import com.springboot.proyectofct.app.models.service.IElementService;
+import com.springboot.proyectofct.app.models.service.IPermissionService;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
 @RestController

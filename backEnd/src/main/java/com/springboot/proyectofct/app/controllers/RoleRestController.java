@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.proyectofct.app.models.entity.Role;
+import com.springboot.proyectofct.app.models.entity.User;
 import com.springboot.proyectofct.app.models.service.IRoleService;
 
 @CrossOrigin(origins = "http://localhost:4200")

@@ -1,39 +1,31 @@
 package com.springboot.proyectofct.app.models.service;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
 
 import com.springboot.proyectofct.app.models.entity.Role;
+import com.springboot.proyectofct.app.models.entity.User;
 
 public interface IRoleService {
-	/**
-	 * List all roles
-	 * 
-	 * @return a list with role objects
-	 */
-	public List<Role> listAll();
 
-	/**
-	 * find a role by id
-	 * 
-	 * @param id
-	 * @return a role object if exists, else null
-	 */
+	public List<Role> findAll();
+
 	public Role findById(Long id);
 
-	/**
-	 * Delete a role by id
-	 * 
-	 * @param id
-	 */
-	public void deleteById(Long id);
+	public void deleteById(Long id) throws SQLException;
 
-	/**
-	 * save a role
-	 * 
-	 * @param role , Class instance of Role
-	 * @return
-	 */
-	public Role save(Role role);
+	public Role save(Role role, Boolean estado) throws SQLException;
 
 	public List<Role> filterByName(String name);
+	
+	public Page<Role> filterByNamePage(String name, int page, String paramOrder, String orden);
+	
+	public Page<Role> findAll(int page, String paramOrder, String orden);
+	
+	public List<Optional<User>> findListUsersRole(Long id) throws SQLException;
+	
+	public List<Long> findUserByRole(Long id) throws SQLException;
 }
