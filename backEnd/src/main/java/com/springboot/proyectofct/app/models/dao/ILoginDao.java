@@ -4,7 +4,13 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.springboot.proyectofct.app.models.entity.Login;
 
-public interface ILoginDao extends CrudRepository<Login, Long>{
+public interface ILoginDao extends CrudRepository<Login,Long>{
 
-	//public Login findByDasId(String dasId);
+	public Login findByUsername(String username);
+	
 }
+
+
+
+
+

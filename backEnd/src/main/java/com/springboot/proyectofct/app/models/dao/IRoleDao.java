@@ -2,17 +2,21 @@ package com.springboot.proyectofct.app.models.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 import com.springboot.proyectofct.app.models.entity.Role;
- 
-public interface IRoleDao extends CrudRepository<Role, Long> {
+
+public interface IRoleDao extends JpaRepository<Role, Long> {
+		
+	@Query("SELECT r FROM Role r WHERE r.name like %?1%")
+	List<Role> filterLikeName(String name);
 	
-	
-	Role findByName(String name);
+	public Page<Role> findAll(Pageable pageable);
 	
 	@Query("SELECT r FROM Role r WHERE r.name like %?1%")
-	List<Role> filterByName(String name);
-}
+	Page<Role> filterLikeNamePage(String name, Pageable pageable);
 
+}
