@@ -26,6 +26,7 @@ import com.springboot.proyectofct.app.models.entity.Role;
 import com.springboot.proyectofct.app.models.entity.User;
 import com.springboot.proyectofct.app.models.service.IElementService;
 import com.springboot.proyectofct.app.models.service.IPermissionService;
+import com.springboot.proyectofct.app.models.service.IRoleService;
 
 
 @Service
