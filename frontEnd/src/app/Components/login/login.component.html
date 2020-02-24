@@ -1,0 +1,33 @@
+<div class="card w-50 h-50 mx-auto mt-2">
+  <div class="card-body">
+    <div class="card-title"><img class="mx-auto d-block img-fluid" [src]=icon></div>
+    <div class="card-text">
+      <form ngNativeValidate #addLogin="ngForm">
+        <div class="form-group">
+          <div class="alert alert-danger" role="alert" *ngIf="attempts>0">{{lerror}}</div>
+          <div class="alert alert-danger" role="alert" *ngIf="blocked">{{lblocked}}</div>
+          <label class="font-weight-bold text-uppercase" for="member">{{lUsuario}}</label>
+          <input [(ngModel)]="userLogin" pattern="[a-zA-Z]{1}[0-9]{6}" maxlength="7" type="text" class="form-control"
+            #das="ngModel" id="member" name="user" placeholder="A123456" required />
+          <div *ngIf="das.invalid && (das.dirty || das.touched)" class="alert alert-danger">
+            <div *ngIf="das?.errors.required">{{valRequired}}</div>
+            <div *ngIf="das?.errors.pattern">{{valDasPattern}}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold text-uppercase" for="memberPassword">{{lClave}}</label>
+          <input [type]=" isPasswordActive ? 'password' : 'text'" class="form-control" id="memberPassword"
+            #pass="ngModel" [(ngModel)]="passLogin" name="password" maxlength="30" required />
+          <div *ngIf="pass.invalid && (pass.dirty || pass.touched)" class="alert alert-danger">
+            <div *ngIf="pass?.errors.required">{{valRequired}}</div>
+          </div>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="CheckPass" (click)="showMemberPassword()">
+          <label class="form-check-label" for="CheckPass">{{cbMostrar}}</label>
+        </div>
+        <button type="submit" [disabled]="addLogin.invalid" (click)="checkLogin()"
+          class="btn btn-info mx-auto d-block">{{btnAcceder}}</button>
+      </form>
+    </div>
+  </div>
