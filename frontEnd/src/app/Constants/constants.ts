@@ -1,6 +1,7 @@
 import { SweetAlertType } from 'sweetalert2';
 import { DualListComponent } from 'angular-dual-listbox';
 import { User } from '../Models/user';
+import { Role } from '../Models/role';
 
 export class Constants {
     //General
@@ -81,6 +82,8 @@ export class Constants {
       idUser: Constants.CERO, dasId: Constants.VACIO, nameUser: Constants.VACIO, lastname1: Constants.VACIO, lastname2: Constants.VACIO, email: Constants.VACIO,
       birthDate: Constants.VACIO, phone: Constants.VACIO, document: Constants.VACIO, numSS: Constants.VACIO, status: Constants.CERO, deleted: false, roles: []
     };
+
+    public static ROLE_DEFAULT: Role = { idRole: Constants.CERO, description: Constants.VACIO, name : Constants.VACIO};
 
     //Estado Swal
     public static SUCCESS: SweetAlertType = 'success';
@@ -370,6 +373,14 @@ export class Constants {
     public static ELEMENTS_TEXT_PERMISSIONS = 'Elementos:';
     public static ADD_PERMISSIONS_TITLE = 'AÑADIR PERMISOS';
 
+    //PERMISSIONS SERVICE
+    public static ROUTE_PERMISSIONS_LIST = 'permissions/list';
+    public static ROUTE_PERMISSIONS_ELEMENTS = 'permissions/elements';
+    public static ROUTE_PERMISSIONS_FOR_SCREEN = 'permissions/permissionsUser/';
+    public static ROUTE_PERMISSIONS_FOR_ROLES = 'permissions/role/';
+    public static ROUTE_PERMISSIONS_SAVE = 'permissions/save/';
+    public static ROUTE_PERMISSIONS = 'permissions';
+    
     //FOUND-403
     public static FOUND_403_MESSAGE = 'No tienes los permisos necesarios para acceder a esta página.';
     public static FOUND_403_TITLE = 'Acceso denegado';
