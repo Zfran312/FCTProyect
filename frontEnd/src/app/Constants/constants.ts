@@ -2,6 +2,7 @@ import { SweetAlertType } from 'sweetalert2';
 import { DualListComponent } from 'angular-dual-listbox';
 import { User } from '../Models/user';
 import { Role } from '../Models/role';
+import { Login } from '../Models/login';
 
 export class Constants {
     //General
@@ -84,6 +85,8 @@ export class Constants {
     };
 
     public static ROLE_DEFAULT: Role = { idRole: Constants.CERO, description: Constants.VACIO, name : Constants.VACIO};
+
+    public static LOGIN_DEFAULT: Login = { idLogin: Constants.CERO, username: Constants.VACIO, password: Constants.VACIO, tries: Constants.CERO, enabled: true};
 
     //Estado Swal
     public static SUCCESS: SweetAlertType = 'success';

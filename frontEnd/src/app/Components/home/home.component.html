@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="card mx-auto d-block">
+    <div class="card-header">
+      <h3 class="text text-secondary" style="text-align: center">{{titulo}}</h3>
+    </div>
+  </div>
+  <div class="pt-3">
+    <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+      <mdb-carousel-item>
+        <div class="view w-100">
+          <img class="d-block w-100" [src]="imgBanner2" alt="First slide">
+          <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+        </div>
+      </mdb-carousel-item>
+      <mdb-carousel-item>
+        <div class="view w-100">
+          <img class="d-block w-100" [src]="imgBanner3" alt="Second slide">
+          <div class="mask rgba-black-strong waves-light" mdbWavesEffect></div>
+        </div>
+      </mdb-carousel-item>
+      <mdb-carousel-item>
+        <div class="view w-100">
+          <img class="d-block w-100" [src]="imgBanner4" alt="Third slide">
+          <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
+        </div>
+      </mdb-carousel-item>
+    </mdb-carousel>
+  </div>
+  <div>
+    <h3 class="text-center pt-4">{{titDescripcion}}</h3>
+    <p class="text-center pt-3">{{descripcion}}</p>
+  </div>
+  <footer class="page-footer font-small blue">
+    <div>
+      <img class="mx-auto d-block mt-3" [src]="imagenBanner" alt="libreria" height="110px">
+    </div>
+    <div class="footer-copyright text-right py-3">{{copyright}}</div>
+  </footer>
