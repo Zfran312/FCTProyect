@@ -22,7 +22,7 @@ import com.springboot.proyectofct.app.models.service.IElementService;
 import com.springboot.proyectofct.app.models.service.IPermissionService;
 
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api")
+@RequestMapping("/api/permissions")
 @RestController
 public class PermissionRestController {
 

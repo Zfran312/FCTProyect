@@ -1,4 +1,5 @@
 import { Role } from './role';
+import { Element } from './element';
 
 export class Permission{
     id?: PkPermission;

@@ -1,0 +1,116 @@
+<div class="container" *ngIf="visible">
+  <div class="card" *ngIf="access">
+    <h3 class="card-header text text-secondary" style="text-align: center">{{titulo}}</h3>
+    <div class="card-body">
+      <div class="my-2 text-left">
+        <button class="btn btn-rounded btn-success" type="button" [routerLink]="['/formUser']"
+          name="Crear_Usuarios" id="btnCreateUser" *ngIf="createBtn" routerLinkActive="router-link-active">{{btnCrear}}</button>
+        <button type="button" (click)="setHabilitar()"
+          class="btn btn-info m-3">{{habilitar==true? 'Ocultar Filtros':'Mostrar Filtros'}}</button>
+          <button type="button" *ngIf="resetFilter" (click)="cleanFilter()" class="btn btn-info m-1">{{btnReset}}</button>
+      </div>
+      <div class="card mb-3" *ngIf="habilitar == true">
+        <div class="card-header">{{btnFiltro}}</div>
+        <div>
+          <form #filtroForumulario="ngForm">
+            <div class="form-group">
+              <label class="mx-3" for="role">{{lDas}}</label>
+              <input id="filterDas" name="filterDas" #filterDas="ngModel" type="text" [(ngModel)]="user.dasId"
+                pattern="[a-zA-Z0-9]{1,}" maxlength="7" class="form-control" />
+              <div *ngIf="filterDas.invalid && (filterDas.dirty || filterDas.touched)" class="alert alert-danger">
+                <div *ngIf="filterDas?.errors.pattern">{{patternDas}}</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="mx-3" for="role">{{lnombre}}</label>
+              <input id="filterNombre" name="filterNombre" #filterNombre="ngModel" type="text"
+                [(ngModel)]="user.nameUser" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{1,}" maxlength="25" class="form-control" />
+              <div *ngIf="filterNombre.invalid && (filterNombre.dirty || filterNombre.touched)"
+                class="alert alert-danger">
+                <div *ngIf="filterNombre?.errors.pattern">{{patternNombre}}</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="mx-3" for="role">{{lapel1}}</label>
+              <input id="filterApel1" name="filterApel1" #filterApel1="ngModel" type="text" [(ngModel)]="user.lastname1"
+                pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{1,}" maxlength="25" class="form-control" />
+              <div *ngIf="filterApel1.invalid && (filterApel1.dirty || filterApel1.touched)" class="alert alert-danger">
+                <div *ngIf="filterApel1?.errors.pattern">{{patternApel1}}</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="mx-3" for="role">{{lapel2}}</label>
+              <input id="filterApel2" name="filterApel2" #filterApel2="ngModel" type="text" [(ngModel)]="user.lastname2"
+                pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{1,}" maxlength="25" class="form-control" />
+              <div *ngIf="filterApel2.invalid && (filterApel2.dirty || filterApel2.touched)" class="alert alert-danger">
+                <div *ngIf="filterApel2?.errors.pattern">{{patternApel2}}</div>
+              </div>
+            </div>
+            <div class="mt-0.5 mx-auto d-inline d-flex justify-content-center">
+              <button type="button" class="btn btn-info m-1" (click)="filterNested(user)"
+                [disabled]="!filtroForumulario.valid">{{btnBuscar}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table id="userTableList" mdbTable class=" table table-bordered table-striped">
+          <thead class="text-break">
+            <tr class="panel-title text-secondary" align="center">
+              <th (click)="reset('dasId')"  class="text-nowrap">{{colDas}} <i class="fa fa-sort"></i>
+              </th>
+              <th (click)="reset('nameUser')" class="text-nowrap">{{colNombre}} <i class="fa fa-sort"></i>
+              </th>
+              <th (click)="reset('lastname1')" class="text-nowrap">{{colApel1}} <i class="fa fa-sort"></i>
+              </th>
+              <th (click)="reset('lastname2')" class="text-nowrap">{{colApel2}} <i class="fa fa-sort"></i>
+              </th>
+              <th (click)="reset('email')" class="text-nowrap">{{colEmail}} <i class="fa fa-sort"></i>
+              </th>
+              <th (click)="reset('status')" class="text-nowrap">{{colEstado}} <i class="fa fa-sort"></i>
+              </th>
+              <!--<th [mdbTableSort]="users" sortBy="phone" scope="col">TFNO <mdb-icon fas icon="sort"></mdb-icon></th>
+              <th [mdbTableSort]="users" sortBy="document" scope="col">DOCUMENTO <mdb-icon fas icon="sort"></mdb-icon></th>
+              <th [mdbTableSort]="users" sortBy="numSS" scope="col">NºS.S. <mdb-icon fas icon="sort"></mdb-icon></th>
+              <th [mdbTableSort]="users" sortBy="birthDate" scope="col">NACIMIENTO <mdb-icon fas icon="sort"></mdb-icon></th>-->
+              <th *ngIf="editBtn">{{colEdit}}</th>
+              <th *ngIf="deleteBtn">{{colElim}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users" class="card-title text-secondary" align="center">
+              <td>{{ user.dasId }}</td>
+              <td>{{ user.nameUser }}</td>
+              <td>{{ user.lastname1 }}</td>
+              <td>{{ user.lastname2 }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.status }}</td>
+              <!-- <td>
+                <button type="button" name="phone" (click)='verPhone(user.phone)' class="btn btn-outline-primary">ver</button>
+              </td>
+              <td>
+                <button type="button" name="document" (click)='verDocument(user.document)' class="btn btn-outline-primary">ver</button>
+              </td>
+              <td>
+                <button type="button" name="numSS" (click)='verNumSS(user.numSS)' class="btn btn-outline-primary">ver</button>
+              </td>
+              <td>
+                <button type="button" name="birthDate" (click)='verBithDate(user.birthDate)' class="btn btn-outline-primary">ver</button>
+              </td>-->
+              <td *ngIf="editBtn">
+                <a name="Editar_Usuario" id = "btnEditUser_{{user.id}}" [routerLink]="['/formUser/', user.idUser]" class="btn btn-info">{{btnEdit}}</a>
+              </td>
+              <td *ngIf="deleteBtn">
+                <button type="button" name="Eliminar_Usuario" id="btnDeleteUser_{{user.id}}" (click)='delete(user)' class="btn btn-danger">{{btnElim}}</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="mx-auto">
+          <user-paginator-nav *ngIf="paginator" [paginator]="paginator"></user-paginator-nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-found403 *ngIf="!access"></app-found403>
+</div>

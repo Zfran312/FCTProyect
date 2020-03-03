@@ -1,7 +1,8 @@
-import { SweetAlertType } from 'sweetalert2';
+import { SweetAlertIcon } from 'sweetalert2';
 import { DualListComponent } from 'angular-dual-listbox';
 import { User } from '../Models/user';
 import { Role } from '../Models/role';
+import { Login } from '../Models/login';
 
 export class Constants {
     //General
@@ -85,11 +86,13 @@ export class Constants {
 
     public static ROLE_DEFAULT: Role = { idRole: Constants.CERO, description: Constants.VACIO, name : Constants.VACIO};
 
+    public static LOGIN_DEFAULT: Login = { idLogin: Constants.CERO, username: Constants.VACIO, password: Constants.VACIO, tries: Constants.CERO, enabled: true};
+
     //Estado Swal
-    public static SUCCESS: SweetAlertType = 'success';
-    public static ERROR: SweetAlertType = 'error';
-    public static WARNNING: SweetAlertType = 'warning';
-    public static INFO: SweetAlertType = 'info';
+    public static SUCCESS: SweetAlertIcon = 'success';
+    public static ERROR: SweetAlertIcon = 'error';
+    public static WARNNING: SweetAlertIcon = 'warning';
+    public static INFO: SweetAlertIcon = 'info';
 
     //Generales RUTAS NO MODIFICAR
     public static API_URI = 'http://localhost:8080/api/';
@@ -169,7 +172,6 @@ export class Constants {
     public static M_FALLO_BUSQ_CURSO_P1 = ' Uppps ';
     public static M_FALLO_BUSQ_CURSO_P2 = ' Lo sentimos pero no podemos hacer el filtro por Nombre. ';
     public static M_LISTA_SKILLS = ' Esta es la lista de Habilidades: ';
-    public static VERDESC_P1: SweetAlertType = 'info';
     public static VERDESC_P2 = 'Descripción del curso';
 
     //Course-List HTML

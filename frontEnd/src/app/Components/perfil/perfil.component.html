@@ -1,0 +1,48 @@
+<div class="card" *ngIf="visible">
+  <div class="card-header">
+    {{user.nameUser.toUpperCase() +" "+ user.lastname1.toUpperCase() +" "+ user.lastname2.toUpperCase()}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{titCambio + user.nameUser}}</h5>
+    <p class="card-text">{{cuerpoCambio}}</p>
+    <div class="my-2 text-left">
+      <button type="button" name="cambiarPass" id="cambiarPass" (click)="setHabilitar()" class="btn btn-success m-3"
+        [disabled]="isUpdating">{{habilitar==true? 'Cancelar cambio':'Cambiar contraseña'}}</button>
+    </div>
+    <div class="card mb-3" *ngIf="habilitar == true">
+      <div class="card-header">{{cambioPass}}</div>
+      <form #changepassword="ngForm" >
+          <div class="form-group row">
+              <label for="password1" class="col-sm-2 col-form-label mx-3">{{l_password1}}</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="pass1" [type]=" isPasswordActive ? 'password' : 'text'" class="form-control"
+                  #password1="ngModel" name="inputPassword" required maxlength="30" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  placeholder="Inserta nueva contraseña">
+                <div *ngIf="password1.invalid && (password1.dirty || password1.touched)" class="alert alert-danger">
+                  <div *ngIf="password1?.errors.required">{{valRequired}}</div>
+                  <div *ngIf="password1?.errors.pattern">{{valPassPattern}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row ">
+              <label for="password2" class="col-sm-2 col-form-label mx-3">{{l_password2}}</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="pass2" [type]=" isPasswordActive ? 'password' : 'text'" class="form-control"
+                  #password2="ngModel" maxlength="30" name="inputPassword2" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  placeholder="Confirma la nueva contraseña">
+                <div *ngIf="password2.invalid && (password2.dirty || password2.touched)" class="alert alert-danger">
+                  <div *ngIf="password2?.errors.required">{{valRequired}}</div>
+                  <div *ngIf="password2?.errors.pattern">{{valPassPattern}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-check mx-3">
+                <input type="checkbox" class="form-check-input" id="CheckPass" (click)="showMemberPassword()">
+                <label class="form-check-label" for="CheckPass">{{l_CheckPass}}</label>
+              </div>
+        <button type="submit" name="cambiarpassword" id="btnCambiarPassword" class="btn btn-info m-3"
+          (click) = "changePassword()" [disabled]="changepassword.invalid">{{cambioPass}}</button>
+      </form>
+    </div>
+  </div>
+</div>

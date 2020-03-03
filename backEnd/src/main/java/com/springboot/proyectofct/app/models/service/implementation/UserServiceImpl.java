@@ -41,7 +41,8 @@ public class UserServiceImpl implements IUserService{
 		}else {
 			pageable = PageRequest.of(page, 4, Sort.by(Sort.Direction.ASC, paramOrder));
 		}
-		return userDao.findAll(pageable);
+		Page<User> user = userDao.findAll(pageable);
+		return user;
 	}
 
 
