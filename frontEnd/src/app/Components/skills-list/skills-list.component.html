@@ -1,0 +1,66 @@
+<div class="container mx-auto d-block" *ngIf="visible">
+  <div class="card" *ngIf="access">
+    <h3 class="card-header text text-secondary" style="text-align: center">{{titulo}}</h3>
+    <div class="card-body">
+      <div class="my-2 text-left">
+        <button type="button" name="Crear_Habilidades" id="btnCreateSkill" *ngIf="createBtn" (click)="setHabilitar()"
+          class="btn btn-success m-3"
+          [disabled]="isUpdating">{{habilitar==true? 'Cancelar Creación':'Crear Habilidad'}}</button>
+        <button type="button" (click)="setHabilitarFiltros()"
+          class="btn btn-info m-3">{{btnhabilitarFiltros==true? 'Ocultar Filtros':'Mostrar Filtros'}}</button>
+        <button type="button" *ngIf="resetFilter" (click)="cleanFilter()" class="btn btn-info">{{btnReset}}</button>
+      </div>
+      <div class="card mb-3" *ngIf="habilitar == true">
+        <div class="card-header">{{lCreacion}}</div>
+        <form #filterForm="ngForm" class="form-inline form-group md-form form-sm active-cyan-2">
+          <label class="mx-3" for="role">{{lnombreSkill}}</label>
+          <input id="createTerm" name="createTerm" #createTerm type="text" [(ngModel)]="skill.name"
+            pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s]{1,}" name="name" class="form-control" maxlength="25" required />
+          <button type="submit" name="createUpdateSkill" id="btnCreateUpdateSkill" class="btn btn-info m-3"
+            (click)=" isUpdating ? updateSkill() : saveNewSkill() "
+            [disabled]="filterForm.invalid">{{isUpdating==true? 'Editar Habilidad':'Crear Habilidad'}}</button>
+        </form>
+      </div>
+      <div class="card mb-3" *ngIf="btnhabilitarFiltros == true">
+        <div class="card-header">{{btnFiltro}}</div>
+        <form #filterForm="ngForm" class="form-inline form-group md-form form-sm active-cyan-2">
+          <label class="mx-3" for="role">{{lnombreSkill}}</label>
+          <input id="filterTerm" name="filterTerm" #filterTerm type="text" [(ngModel)]="skill.name"
+            pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s]{1,}" maxlength="25" name="nombre" class="form-control" required />
+          <button type="submit" class="btn btn-info m-3" (click)="filterByRoleName(skill.name)"
+            [disabled]="filterForm.invalid">{{btnBuscar}}</button>
+        </form>
+      </div>
+      <table id="skillTableList" mdbTable class="table table-bordered table-striped">
+        <thead>
+          <tr class="card-title text-secondary" align="center">
+            <th (click)="reset('name')">{{colNombre}} <i class="fa fa-sort"></i></th>
+            <th *ngIf="editBtn">{{colEdit}}</th>
+            <th *ngIf="deleteBtn">{{colElim}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let skill of skills" class="card-title text-secondary" align="center">
+            <td>{{ skill.name }}</td>
+            <td *ngIf="editBtn">
+              <button type="button" name="Editar_Habilidad" id="btnEditSkill_{{skill.idSkill}}"
+                *ngIf="isUpdating == false" [routerLink]="['/listSkill/', skill.idSkill]" class="btn btn-info">Editar
+                Habilidad</button>
+              <button type="button" name="Cancelar_Habilidad" id="btnEditSkill_{{skill.idSkill}}"
+                *ngIf="isUpdating == true" [routerLink]="['/listSkill/page/', page]" class="btn btn-info">Cancelar
+                Edición</button>
+            </td>
+            <td *ngIf="deleteBtn">
+              <button type="button" name="Borrar_Habilidad" id="btnDeleteSkill_{{skill.idSkill}}"
+                (click)='delete(skill)' class="btn btn-danger">{{btnEliminar}}</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="justify-content-center">
+        <skill-paginator-nav *ngIf="paginator" [paginator]="paginator"></skill-paginator-nav>
+      </div>
+    </div>
+  </div>
+  <app-found403 *ngIf="!access"></app-found403>
+</div>

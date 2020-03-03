@@ -1,0 +1,50 @@
+<div class="container" *ngIf="visible">
+  <div class="card" *ngIf="access">
+    <h3 class="card-header text text-secondary" style="text-align: center">{{titulo}}</h3>
+    <div class="card-body">
+      <div class="my-2 text-left">
+        <button name="Crear_Role" id="btnCreateRole" class="btn btn-rounded btn-success" type="button" *ngIf="createBtn" [routerLink]="['/formRole']"
+          routerLinkActive="router-link-active">{{btnCrear}}</button>
+        <button type="button" (click)="setHabilitar()"
+          class="btn btn-info m-3">{{habilitar==true? 'Ocultar Filtros':'Mostrar Filtros'}}</button>
+        <button type="button" *ngIf="resetFilter" (click)="cleanFilter()" class="btn btn-info">{{btnReset}}</button>
+      </div>
+      <div class="card mb-3" *ngIf="habilitar == true">
+        <div class="card-header">{{btnFiltroRol}}</div>
+        <form #filterForm="ngForm" class="form-inline form-group md-form form-sm active-cyan-2">
+          <label class="mx-3" for="role">{{lfiltro}}</label>
+          <input name="filterTerm" type="text" [(ngModel)]="role.name"
+            pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{1,}" maxlength="15" name="name"
+            class="form-control" required />
+          <button type="submit" class="btn btn-info m-3" (click)="filterByRoleName(role.name)" [disabled]="filterForm.invalid">{{btnBuscar}}</button>
+        </form>
+      </div>
+      <table id="roleTableList" mdbTable class="table table-bordered table-striped">
+        <thead>
+          <tr class="card-title text-secondary" align="center">
+            <th (click)="reset('name')">{{colNombre}} <i class="fa fa-sort"></i></th>
+            <th>{{colDesc}}</th>
+            <th *ngIf="editBtn">{{colEdit}}</th>
+            <th *ngIf="deleteBtn">{{colElim}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let role of roles" class="card-title text-secondary" align="center">
+            <td>{{ role.name }}</td>
+            <td>{{ role.description }}</td>
+            <td *ngIf="editBtn">
+              <a name="Editar_Role" id="btnEditRole_{{role.idRole}}" [routerLink]="['/listRole/', role.idRole]" routerLinkActive="router-link-active"
+                class="btn btn-info" *ngIf="!checkMyRole(role)">{{btnEdit}}</a>
+              <a name="Editar_Role" id="btnEditRole_{{role.idRole}}" class="btn btn-info" [routerLink]="['/listRole/page/#']" *ngIf="checkMyRole(role)" (click)="myRoleMessage()">{{btnEdit}}</a>
+            </td>
+            <td *ngIf="deleteBtn">
+              <button type="button" name="Borrar_Role" id="btnDeleteRole_{{role.idRole}}" (click)='delete(role)' class="btn btn-danger">{{btnEliminar}}</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <role-paginator-nav *ngIf="paginator" [paginator]="paginator"></role-paginator-nav>
+    </div>
+  </div>
+  <app-found403 *ngIf="!access"></app-found403>
+</div>

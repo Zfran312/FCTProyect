@@ -1,0 +1,156 @@
+<div class="container">
+    <div class="card mx-auto d-block" style="width: 50rem;" *ngIf="canUse">
+        <div class="card-header">
+            <h3 class="text text-secondary" style="text-align: center">{{titulo}}</h3>
+        </div>
+        <div class="card-body">
+            <form #addeditusersform="ngForm">
+                <div class="form-group">
+                    <label for="das">{{lDas}}</label>
+                    <input type="text" [disabled]='isUpdating' class="form-control" id="das" name="das"
+                        [(ngModel)]="user.dasId" #das="ngModel" pattern="[a-zA-Z]{1}[0-9]{6}" placeholder="A000000"
+                        minlength="7" maxlength="7" required />
+                </div>
+                <div *ngIf="das.invalid && (das.dirty || das.touched)" class="alert alert-danger">
+                    <div *ngIf="das?.errors.required">{{valRequired}}</div>
+                    <div *ngIf="das?.errors.minlength">{{valDasLenght}}</div>
+                    <div *ngIf="das?.errors.maxlength">{{valDasLenght}}</div>
+                    <div *ngIf="das?.errors.pattern">{{valDasPattern}}</div>
+                </div>
+                <div id="div_uni_idenf" class="form-group">
+                    <label for="unique_identifier">{{lIdent}}</label>
+                    <select id="unique_identifier" class="form-control" (change)="changeUniqIdent($event.target.value)">
+                        <option checked>{{opDni}}</option>
+                        <option>{{opNie}}</option>
+                        <option>{{opPassport}}</option>
+                    </select>
+                </div>
+                <!-- IDENTIFICADORES UNICO DNI,NIE PASAPORTE-->
+                <div *ngIf="documento == 1" class="form-group">
+                    <label for="dni">{{opDni}}:</label>
+                    <input type="text" class="form-control" id="dni" name="dni" placeholder="12345678A"
+                        [(ngModel)]="user.document" #dni="ngModel" pattern="[0-9]{8}[a-zA-Z]{1}" minlength="9"
+                        maxlength="9" name="unique_identifier" required />
+                    <div *ngIf="dni.invalid && (dni.dirty || dni.touched)" class="alert alert-danger">
+                        <div *ngIf="dni?.errors.required">{{valRequired}}</div>
+                        <div *ngIf="dni?.errors.minlength">{{valIdentificadorLenght}}</div>
+                        <div *ngIf="dni?.errors.maxlength">{{valIdentificadorLenght}}</div>
+                        <div *ngIf="dni?.errors.pattern">{{valDniPattern}}</div>
+                    </div>
+                </div>
+                <div *ngIf="documento == 2" class="form-group">
+                    <label for="nie">{{opNie}}:</label>
+                    <input type="text" class="form-control" id="nie" name="nie" placeholder="Z1234567Y"
+                        [(ngModel)]="user.document" #nie="ngModel" pattern="[XYZ]{1}[0-9]{7}[A-Z]{1}" maxlength="9"
+                        minlength="9" name="unique_identifier" required />
+                    <div *ngIf="nie.invalid && (nie.dirty || nie.touched)" class="alert alert-danger">
+                        <div *ngIf="nie?.errors.required">{{valRequired}}</div>
+                        <div *ngIf="nie?.errors.minlength">{{valIdentificadorLenght}}</div>
+                        <div *ngIf="nie?.errors.maxlength">{{valIdentificadorLenght}}</div>
+                        <div *ngIf="nie?.errors.pattern">{{valNiePattern}}</div>
+                    </div>
+                </div>
+                <div *ngIf="documento == 3" class="form-group">
+                    <label for="pasaporte">{{opPassport}}:</label>
+                    <input type="text" class="form-control" id="passport" name="passport" placeholder="ZZZ123456"
+                        [(ngModel)]="user.document" #passport="ngModel" pattern="[a-zA-Z]{3}[0-9]{6}" maxlength="9"
+                        name="unique_identifier" required />
+                    <div *ngIf="passport.invalid && (passport.dirty || passport.touched)" class="alert alert-danger">
+                        <div *ngIf="passport?.errors.required">{{valRequired}}</div>
+                        <div *ngIf="passport?.errors.minlength">{{valIdentificadorLenght}}</div>
+                        <div *ngIf="passport?.errors.maxlength">{{valIdentificadorLenght}}</div>
+                        <div *ngIf="passport?.errors.pattern">{{valPassportPattern}}</div>
+                    </div>
+                </div>
+                <!-- FIN IDENTIFICADORES UNICO DNI,NIE PASAPORTE-->
+                <div class="form-group">
+                    <label for="nss">{{lnSS}}</label>
+                    <input type="text" class="form-control" placeholder="12/12345678/12" id="nss" name="nss"
+                        [(ngModel)]="user.numSS" #nss="ngModel" pattern="[0-9]{2}/[0-9]{8}/[0-9]{2}" maxlength="14"
+                        minlength="14" />
+                </div>
+                <div *ngIf="nss.invalid && (nss.dirty || nss.touched)" class="alert alert-danger">
+                    <div *ngIf="nss?.errors.minlength">{{valSSLenght}}</div>
+                    <div *ngIf="nss?.errors.maxlength">{{valSSLenght}}</div>
+                    <div *ngIf="nss?.errors.pattern">{{valSSPattern}}</div>
+                </div>
+                <div class="form-group">
+                    <label for="name">{{lnombre}}</label>
+                    <input type="text" class="form-control" name="name" id="name" [(ngModel)]="user.nameUser"
+                        #name="ngModel" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{1,}" maxlength="25" required />
+                </div>
+                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                    <div *ngIf="name?.errors.required">{{valRequired}}</div>
+                    <div *ngIf="name?.errors.maxlength">{{valNombreLenght}}</div>
+                    <div *ngIf="name?.errors.pattern">{{valNombrePattern}}</div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname1">{{lapel1}}</label>
+                    <input type="text" class="form-control" name="lastname1" id="lastname1" [(ngModel)]="user.lastname1"
+                        #lastname1="ngModel" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{1,}" maxlength="25" required />
+                </div>
+                <div *ngIf="lastname1.invalid && (lastname1.dirty || lastname1.touched)" class="alert alert-danger">
+                    <div *ngIf="lastname1?.errors.required">{{valRequired}}</div>
+                    <div *ngIf="lastname1?.errors.maxlength">{{valApel1Lenght}}</div>
+                    <div *ngIf="lastname1?.errors.pattern">{{valApel1Pattern}}</div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname2">{{lapel2}}</label>
+                    <input type="text" class="form-control" name="lastname2" id="lastname2" [(ngModel)]="user.lastname2"
+                        #lastname2="ngModel" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{0,}" maxlength="25" />
+                </div>
+                <div *ngIf="lastname2.invalid && (lastname2.dirty || lastname1.touched)" class="alert alert-danger">
+                    <div *ngIf="lastname2?.errors.maxlength">{{valApel2Lenght}}</div>
+                    <div *ngIf="lastname2?.errors.pattern">{{valApel2Pattern}}</div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">{{ltlf}}</label>
+                    <input type="text" class="form-control" name="phone" id="phone" [(ngModel)]="user.phone"
+                        #phone="ngModel" pattern="[0-9]{9}" placeholder="789466132" maxlength="9" />
+                </div>
+                <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
+                    <div *ngIf="phone?.errors.maxlength">{{valTlfLenght}}</div>
+                    <div *ngIf="phone?.errors.pattern">{{valTlfPattern}}</div>
+                </div>
+                <div class="form-group">
+                    <label for="email">{{lemail}}</label>
+                    <input type="email" class="form-control" name="email" id="email" [(ngModel)]="user.email"
+                        #email="ngModel" maxlength="60" placeholder="manolito@atos.com" required email />
+                </div>
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                    <div *ngIf="email?.errors.required">{{valRequired}}</div>
+                    <div *ngIf="email?.errors.maxlength">{{valEmailLength}}</div>
+                    <div *ngIf="email?.errors.email">{{valEmailPattern}}</div>
+                </div>
+                <div class="form-group">
+                    <label for="birth_d">{{lFech}}</label>
+                    <input type="date" class="form-control" name="date" id="date"
+                        (change)="changeDate($event.target.value)" (blur)="checkDate($event.target.value)"
+                        [(ngModel)]="user.birthDate" #date="ngModel" max="limit_date" min="1900-01-01" required />
+                </div>
+                <div *ngIf="date.invalid && (date.dirty || date.touched)" class="alert alert-danger">
+                    <div *ngIf="date?.errors.required">{{valRequired}}</div>
+                    <!--
+                        Se controlan por los metodos ya que no esta reconociendo el max y min length
+                    <div *ngIf="date?.errors.maxlength">{{valFechLengthMax}}</div>
+                    <div *ngIf="date?.errors.minlength">{{valFechLengthMin}}</div>-->
+                    <div *ngIf="date?.errors.date">{{valFechPattern}}</div>
+                </div>
+                <div class="my-3">
+                    <label for="role">{{lroles}}</label>
+                    <dual-list [disabled]="sameUser" [source]="data" key="idRole" display="name"
+                        [(destination)]="confirmed" [format]="formato">
+                    </dual-list>
+                </div>
+                <div class="mt-5 mx-auto d-inline d-flex justify-content-center">
+                    <button [disabled]="addeditusersform.invalid" type="submit" name="envia" value="Enviar"
+                        class="btn btn-info "
+                        (click)="isUpdating ? updateUser() : saveNewUser()">{{btnEnviar}}</button>
+                    <button type="button" name="volver" value="Volver" class="btn btn-danger mx-2"
+                        (click)="volver()">{{btnVolver}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <app-found403 *ngIf="!canUse"></app-found403>
+</div>
