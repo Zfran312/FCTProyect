@@ -39,17 +39,17 @@ public class PermissionRestController {
 		return permissionService.validPermission(screen, roleList);
 	}
 	
-	@GetMapping("/permissions/elements")
+	@GetMapping("/elements")
 	public List<Element> ListElements(){
 		return elementService.findAll();
 	}
 	
-	@PostMapping("/permissions/save/{idRole}")
+	@PostMapping("/save/{idRole}")
 	public List<Permission> savePermissions(@RequestBody List<Element> elements, @PathVariable Long idRole) {
 		return permissionService.savePermission(elements, idRole);
 	}
 	
-	@PostMapping("/permissions/role/{idRole}")
+	@PostMapping("/role/{idRole}")
 	public List<Permission> listByRole(@PathVariable Long idRole, @Valid @RequestBody Role role){
 		return permissionService.findByRole(role);
 	}

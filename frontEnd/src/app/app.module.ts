@@ -27,6 +27,7 @@ import { UserService } from './Services/user/user.service';
 import { RoleService } from './Services/role/role.service';
 import { SkillService } from './Services/skill/skill.service';
 import { LoginService } from './Services/login/login.service';
+import { Found404Component } from './Components/found404/found404.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LoginService } from './Services/login/login.service';
     SkillPaginatorComponent,
     UserPaginatorComponent,
     Found403Component,
-    FormUserComponent
+    FormUserComponent,
+    Found404Component
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

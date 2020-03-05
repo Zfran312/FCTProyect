@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="card mx-auto d-block" style="width: 50rem;" *ngIf="canUse">
+    <div class="card-header">
+      <h3 class="text text-secondary" style="text-align: center">{{titulo}}</h3>
+    </div>
+    <div class="card-body">
+      <form ngNativeValidate #addeditusersform="ngForm">
+        <div>
+          <label for="name">{{lNombre}}</label>
+          <input [(ngModel)]="course.nameCourse" type="text" placeholder="Nombre Curso" maxlength="60" #nombre="ngModel"
+            name="name" class="form-control" required />
+        </div>
+        <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
+          <div *ngIf="nombre?.errors.required">{{valRequired}}</div>
+        </div>
+        <div>
+          <label for="description">{{lDesc}}</label>
+          <textarea type="text" placeholder="Descripción Curso" maxlength="2000" #descrip="ngModel" name="description"
+            [(ngModel)]="course.descC" class="form-control" required></textarea>
+        </div>
+        <div *ngIf="descrip.invalid && (descrip.dirty || descrip.touched)" class="alert alert-danger">
+          <div *ngIf="descrip?.errors.required">{{valRequired}}</div>
+        </div>
+        <div>
+          <label for="hours">{{lhoras}}</label>
+          <input type="number" min="1" max="999" pattern="[0-9]{1,3}" name="hours" #hora="ngModel"
+            [(ngModel)]="course.duration" class="form-control" required />
+        </div>
+        <div *ngIf="hora.invalid && (hora.dirty || hora.touched)" class="alert alert-danger">
+          <div *ngIf="hora?.errors.required">{{valRequired}}</div>
+          <div *ngIf="hora?.errors.pattern">{{valHorasCurso}}</div>
+
+        </div>
+        <div>
+          <label for="thematic">{{lTematica}}</label>
+          <input type="text" placeholder="Tema que trata el curso" pattern="[a-zA-Z]{1,}" maxlength="15" name="thematic"
+            #tematica="ngModel" [(ngModel)]="course.topic" class="form-control" required />
+        </div>
+        <div *ngIf="tematica.invalid && (tematica.dirty || tematica.touched)" class="alert alert-danger">
+          <div *ngIf="tematica?.errors.required">{{valRequired}}</div>
+          <div *ngIf="tematica?.errors.pattern">{{valTematicaPattern}}</div>
+        </div>
+        <div>
+          <label for="level">{{lNivel}}</label>
+          <select name="lvl" [(ngModel)]="course.level" class="form-control" required>
+            <option value="1">{{nivelA}}</option>
+            <option value="2">{{nivelM}}</option>
+            <option value="3">{{nivelB}}</option>
+          </select>
+        </div>
+        <div>
+          <label for="published">{{lPublicado}}</label>
+          <select [(ngModel)]="course.published" name="publish" class="form-control" required>
+            <option value="true">{{publicadoTrue}}</option>
+            <option value="false">{{publicadoFalse}}</option>
+          </select>
+        </div>
+        <!--<div>
+          <label for="file_vidio">VIDEO INTRO:</label>
+          <input type="file" [(ngModel)]="course.preview" name="file_vidio" class="form-control" [required]='!update'/>
+        </div>-->
+        <div>
+          <label for="file_arch">{{lFtp}}</label>
+          <input type="file" [(ngModel)]="course.route" id="file01" name="file_arc" class="form-control"
+            [required]='!isUpdating' />
+        </div>
+        <div class="my-3">
+          <label for="skill">{{lSkill}}</label>
+          <dual-list [source]="data" key="idSkill" display="name" [(destination)]="confirmed" [format]="formato">
+          </dual-list>
+        </div>
+        <div class="mt-5 mx-auto d-inline d-flex justify-content-center">
+          <button type="submit" name="createUpdateCourse" id="btnCreateUpdateCourse" value="Enviar"
+            (click)="saveNewCourse()" class="btn btn-info" [disabled]="addeditusersform.invalid">Enviar</button>
+          <button type="button" name="volver" value="Volver" class="btn btn-danger mx-2"
+            (click)="volver()">{{btnVolver}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-found403 *ngIf="!canUse"></app-found403>
+</div>

@@ -8,6 +8,9 @@ import { SkillsListComponent } from './Components/skills-list/skills-list.compon
 import { CourseListComponent } from './Components/course-list/course-list.component';
 import { PerfilComponent } from './Components/perfil/perfil.component';
 import { FormUserComponent } from './Components/form-user/form-user.component';
+import { Found404Component } from './Components/found404/found404.component';
+import { ChangePasswordComponent } from './Components/change-password/change-password.component';
+import { FormCourseComponent } from './Components/form-course/form-course.component';
 
 const routes: Routes = [
   {
@@ -48,6 +51,18 @@ const routes: Routes = [
     path: 'formUser',
     component: FormUserComponent,
     runGuardsAndResolvers: 'always'
+  },
+  {
+    path: '**',
+    component: Found404Component
+  },
+  {
+    path: 'changePassword/:id/:das',
+    component: ChangePasswordComponent
+  },
+  {
+    path: 'formCourse',
+    component: FormCourseComponent
   },
 ];
 
