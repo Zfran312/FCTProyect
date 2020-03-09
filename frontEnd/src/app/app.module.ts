@@ -28,6 +28,7 @@ import { RoleService } from './Services/role/role.service';
 import { SkillService } from './Services/skill/skill.service';
 import { LoginService } from './Services/login/login.service';
 import { Found404Component } from './Components/found404/found404.component';
+import { FormRoleComponent } from './Components/form-role/form-role.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { Found404Component } from './Components/found404/found404.component';
     UserPaginatorComponent,
     Found403Component,
     FormUserComponent,
-    Found404Component
+    Found404Component,
+    FormRoleComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
