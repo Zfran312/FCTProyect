@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="card mx-auto d-block" style="width: 50rem;" *ngIf="canUse">
+    <div class="card-header">
+      <h3 class="text text-secondary" style="text-align: center">{{titulo}}</h3>
+    </div>
+    <div class="card-body">
+      <form #addeditusersform="ngForm">
+        <div>
+          <label for="name">{{lNombre}}</label>
+          <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s]{1,}" maxlength="15" name="name" [(ngModel)]="role.name"
+            class="form-control" #nombre="ngModel" required />
+        </div>
+        <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
+          <div *ngIf="nombre?.errors.required">{{valRequired}}</div>
+          <div *ngIf="nombre?.errors.pattern">{{valNombrePattern}}</div>
+        </div>
+        <div>
+          <label for="name">{{ldesc}}</label>
+          <input pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s]{1,}" maxlength="40" name="descripccion"
+            [(ngModel)]="role.description" class="form-control" #descrip="ngModel" required />
+        </div>
+        <div *ngIf="descrip.invalid && (descrip.dirty || descrip.touched)" class="alert alert-danger">
+          <div *ngIf="descrip?.errors.required">{{valRequired}}</div>
+          <div *ngIf="descrip?.errors.pattern">{{valDescripPattern}}</div>
+        </div>
+        <label for="element"> Usuarios </label>
+          <dual-list [source]="allUsers" key="idUser" display="dasId" [(destination)]="confirmedUser" [format]="formato">
+          </dual-list>
+        <div *ngIf="editando == true">
+          <br />
+            <label for="element">Elementos:</label>
+            <dual-list [source]="data" key="idElement" display="nameElement" [(destination)]="confirmed" 
+              [format]="formato">
+            </dual-list>
+        </div>
+        <div class="mt-5 mx-auto d-inline d-flex justify-content-center">
+          <button type="submit" name="createUpdateRole" id="btnCreateUpdateRole" value="Enviar"
+            (click)=" isUpdating ? updateRole() : saveNewRole() " class="btn btn-info"
+            [disabled]="addeditusersform.invalid">{{btnEnviar}}</button>
+          <button type="button" name="volver" value="Volver" class="btn btn-danger mx-2"
+            (click)="volver()">{{btnVolver}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-found403 *ngIf="!canUse"></app-found403>
+</div>

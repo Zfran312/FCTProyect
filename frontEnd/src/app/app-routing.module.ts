@@ -11,6 +11,8 @@ import { FormUserComponent } from './Components/form-user/form-user.component';
 import { Found404Component } from './Components/found404/found404.component';
 import { ChangePasswordComponent } from './Components/change-password/change-password.component';
 import { FormCourseComponent } from './Components/form-course/form-course.component';
+import { FormPermissionComponent } from './Components/form-permission/form-permission.component';
+import { FormRoleComponent } from './Components/form-role/form-role.component';
 
 const routes: Routes = [
   {
@@ -63,6 +65,14 @@ const routes: Routes = [
   {
     path: 'formCourse',
     component: FormCourseComponent
+  },
+  {
+    path: 'formPermission/:id',
+    component: FormPermissionComponent
+  },
+  {
+    path: 'formRole',
+    component: FormRoleComponent
   },
 ];
 
