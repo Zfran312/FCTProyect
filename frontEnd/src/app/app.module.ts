@@ -29,6 +29,10 @@ import { SkillService } from './Services/skill/skill.service';
 import { LoginService } from './Services/login/login.service';
 import { Found404Component } from './Components/found404/found404.component';
 import { FormRoleComponent } from './Components/form-role/form-role.component';
+import { ChangePassService } from './Services/change-password/change-password.service';
+import { ChangePasswordComponent } from './Components/change-password/change-password.component';
+import { FormCourseComponent } from './Components/form-course/form-course.component';
+import { FormPermissionComponent } from './Components/form-permission/form-permission.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,10 @@ import { FormRoleComponent } from './Components/form-role/form-role.component';
     Found403Component,
     FormUserComponent,
     Found404Component,
-    FormRoleComponent
+    FormRoleComponent,
+    FormCourseComponent,
+    FormPermissionComponent,
+    ChangePasswordComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -60,7 +67,7 @@ import { FormRoleComponent } from './Components/form-role/form-role.component';
     NgxPaginationModule,
     AppRoutingModule
   ],
-  providers: [NavbarService, UserService, RoleService, SkillService, LoginService],
+  providers: [NavbarService, UserService, RoleService, SkillService, LoginService, ChangePassService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

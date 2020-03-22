@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Login } from 'src/app/Models/login';
 import swal from 'sweetalert2';
 import { User } from 'src/app/Models/user';
-import { ChangePassService } from 'src/app/Services/change-password/change-pass.service';
+import { ChangePassService } from 'src/app/Services/change-password/change-password.service';
 import { Constants } from '../../Constants/constants';
 
 @Component({
