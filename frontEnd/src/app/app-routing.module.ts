@@ -24,10 +24,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  
   {
-    path: 'home',
-    component: HomeComponent
+    path: 'formUser',
+    component: FormUserComponent,
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'listRole/page/:page',
@@ -42,25 +42,32 @@ const routes: Routes = [
     component: SkillsListComponent
   },
   {
-    path: 'listCourse/page/:page',
-    component: CourseListComponent
+    path: 'listSkill/:id',
+    component: SkillsListComponent
   },
   {
-    path: 'profile',
-    component: PerfilComponent
-  },
-  {
-    path: 'formUser',
-    component: FormUserComponent,
-    runGuardsAndResolvers: 'always'
-  },
-  {
-    path: '**',
-    component: Found404Component
+    path: 'formRole',
+    component: FormRoleComponent
   },
   {
     path: 'changePassword/:id/:das',
     component: ChangePasswordComponent
+  },
+  {
+    path: 'formUser/:id',
+    component: FormUserComponent
+  },
+  {
+    path: 'listRole/:id',
+    component: FormRoleComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'listCourse/page/:page',
+    component: CourseListComponent
   },
   {
     path: 'formCourse',
@@ -71,9 +78,17 @@ const routes: Routes = [
     component: FormPermissionComponent
   },
   {
-    path: 'formRole',
-    component: FormRoleComponent
+    path: 'formCourse/:id',
+    component: FormCourseComponent
   },
+  {
+    path: 'profile',
+    component: PerfilComponent
+  },
+  {
+    path: '**',
+    component: Found404Component
+  }
 ];
 
 
